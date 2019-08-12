@@ -22,17 +22,16 @@
 # definition file).
 #
 
-DEVICE_PATH := device/asus/X00TD
+PLATFORM_PATH := device/asus/sdm660-common
 
 BOARD_VENDOR := asus
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := sdm636
+TARGET_BOOTLOADER_BOARD_NAME := SDM660
 TARGET_NO_BOOTLOADER := true
 
 # Platform
 TARGET_BOARD_PLATFORM := sdm660
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno509
 
 # Architecture
 TARGET_ARCH := arm64
@@ -49,10 +48,6 @@ TARGET_2ND_CPU_VARIANT := cortex-a73
 
 TARGET_USES_64_BIT_BINDER := true
 
-# Assert
-TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
-TARGET_OTA_ASSERT_DEVICE := ASUS_X00TD,X00TD,X00T
-
 # Kernel
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0 earlycon=msm_serial_dm,0xc170000 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=1 firmware_class.path=/vendor/firmware_mnt/image loop.max_part=7
@@ -61,7 +56,6 @@ BOARD_KERNEL_PAGESIZE    := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET     := 0x01000000
 TARGET_KERNEL_SOURCE := kernel/asus/sdm660
-TARGET_KERNEL_CONFIG := X00TD_defconfig
 TARGET_KERNEL_VERSION := 4.4
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_KERNEL_CLANG_COMPILE := true
@@ -121,7 +115,7 @@ TARGET_USES_AOSP_FOR_AUDIO := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_USE_BTNV := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
 
 # Camera
 BOARD_QTI_CAMERA_32BIT_ONLY := true
@@ -142,7 +136,7 @@ TARGET_CRYPTFS_HW_PATH ?= vendor/qcom/opensource/cryptfs_hw
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 MAX_VIRTUAL_DISPLAY_DIMENSION := 4096
-OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 TARGET_USES_GRALLOC1 := true
 TARGET_USES_HWC2 := true
@@ -164,7 +158,7 @@ ifeq ($(HOST_OS),linux)
 endif
 
 # Filesystem
-TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
+TARGET_FS_CONFIG_GEN := $(PLATFORM_PATH)/config.fs
 
 # FM
 BOARD_HAS_QCA_FM_SOC := "cherokee"
@@ -176,17 +170,14 @@ USE_DEVICE_SPECIFIC_GPS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 
 # HIDL
-DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3221225472
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 55155080704
 BOARD_VENDORIMAGE_PARTITION_SIZE := 838860800
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 
@@ -206,7 +197,6 @@ TARGET_PER_MGR_ENABLED := true
 
 # Power
 TARGET_USES_INTERACTION_BOOST := true
-TARGET_TAP_TO_WAKE_NODE := "/sys/kernel/touchpanel/dclicknode"
 
 # Properties
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
@@ -215,11 +205,11 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 BOARD_USES_QCOM_HARDWARE := true
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/recovery.fstab
+TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/recovery.fstab
 
 # Releasetools
-TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_X00TD
-TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
+TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_ASUS
+TARGET_RELEASETOOLS_EXTENSIONS := $(PLATFORM_PATH)
 
 # RIL
 TARGET_RIL_VARIANT := caf
@@ -227,22 +217,18 @@ DISABLE_RILD_OEM_HOOK := true
 ENABLE_VENDOR_RIL_SERVICE := true
 
 # Seccomp
-BOARD_SECCOMP_POLICY := $(DEVICE_PATH)/seccomp
+BOARD_SECCOMP_POLICY := $(PLATFORM_PATH)/seccomp
 
 # Security patch level
 VENDOR_SECURITY_PATCH := 2019-06-05
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
+BOARD_SEPOLICY_DIRS += $(PLATFORM_PATH)/sepolicy/vendor
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(PLATFORM_PATH)/sepolicy/private
 
 # Use Snapdragon LLVM, if available
 TARGET_USE_SDCLANG := true
-
-# Vendor init
-TARGET_INIT_VENDOR_LIB := libinit_X00TD
-TARGET_RECOVERY_DEVICE_MODULES := libinit_X00TD
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
@@ -263,4 +249,4 @@ WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
 
 # inherit from the proprietary version
--include vendor/asus/X00TD/BoardConfigVendor.mk
+-include vendor/asus/sdm660-common/BoardConfigVendor.mk

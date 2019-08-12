@@ -200,5 +200,5 @@ Value * VerifyModemFn(const char *name, State *state, const std::vector<std::uni
 }
 
 void Register_librecovery_updater_X00TD() {
-    RegisterFunction("X00T.verify_modem", VerifyModemFn);
+    RegisterFunction("ASUS.verify_modem", VerifyModemFn);
 }

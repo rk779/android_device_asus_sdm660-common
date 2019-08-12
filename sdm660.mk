@@ -115,12 +115,7 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0 \
     libbthost_if
-
-# Boot animation
-TARGET_SCREEN_HEIGHT := 2160
-TARGET_SCREEN_WIDTH := 1080
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -171,9 +166,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/excluded-input-devices.xml:system/etc/excluded-input-devices.xml
 
 # Fingerprint feature
-PRODUCT_PACKAGES += \
-    fingerprintd
-
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
 
@@ -257,10 +249,6 @@ PRODUCT_PACKAGES += \
 # Low power Whitelist
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
-
-# Manifest replacement for non NFC variant
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/bin/device_check.sh:install/bin/device_check.sh
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -371,7 +359,7 @@ PRODUCT_PACKAGES += \
 
 # Recovery
 PRODUCT_PACKAGES += \
-    librecovery_updater_X00TD
+    librecovery_updater_ASUS
 
 # RIL
 PRODUCT_PACKAGES += \
@@ -442,17 +430,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libtinyxml2
 
-# Touch HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.X00TD
-
 # Trust HAL
 PRODUCT_PACKAGES += \
     vendor.lineage.trust@1.0-service
 
 # USB
 PRODUCT_PACKAGES += \
-	android.hardware.usb@1.0-service.basic
+    android.hardware.usb@1.0-service.basic
 
 # Vendor properties
 -include $(LOCAL_PATH)/vendor_prop.mk
@@ -497,4 +481,4 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
 
-$(call inherit-product, vendor/asus/X00TD/X00TD-vendor.mk)
+$(call inherit-product, vendor/asus/sdm660-common/sdm660-common-vendor.mk)
